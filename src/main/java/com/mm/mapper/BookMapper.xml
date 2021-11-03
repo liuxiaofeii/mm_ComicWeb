@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.BookMapper">
+    <!--    实体类属性与数据库的映射-->
+<!--    <resultMap id="BooksResultMap" type="Book">-->
+<!--        <result property="id" column="BookId"/>-->
+<!--        <result property="name" column="BookName"/>-->
+<!--        <result property="password" column="password"/>-->
+<!--        <result property="phone" column="phone"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--    </resultMap>-->
+    <resultMap id="booksResultMap" type="com.mm.domain.Book">
+        <result property="bookId" column="bookId"/>
+        <result property="bookName" column="bookName"/>
+        <result property="bookIntro" column="bookIntro"/>
+        <result property="bookPhoto" column="bookPhoto"/>
+        <result property="bookLabel" column="bookLabel"/>
+        <result property="bookFree" column="bookFree"/>
+        <result property="bookPrice" column="bookPrice"/>
+        <result property="bookAuthor" column="bookAuthor"/>
+        <result property="bookReadNums" column="bookReadNums"/>
+        <result property="isDelete" column="isDelete"/>
+        <result property="categoryId" column="categoryId"/>
+
+    </resultMap>
+
+    <resultMap id="booksDtoResultMap" type="com.mm.domain.Book">
+        <result property="bookId" column="bookId"/>
+        <result property="bookName" column="bookName"/>
+        <result property="bookIntro" column="bookIntro"/>
+        <result property="bookPhoto" column="bookPhoto"/>
+        <result property="bookLabel" column="bookLabel"/>
+        <result property="bookFree" column="bookFree"/>
+        <result property="bookPrice" column="bookPrice"/>
+        <result property="bookAuthor" column="bookAuthor"/>
+        <result property="bookReadNums" column="bookReadNums"/>
+        <result property="isDelete" column="isDelete"/>
+        <result property="categoryId" column="categoryId"/>
+        <association property="category" column="categoryId" select="com.mm.mapper.CategoryMapper.load"/>
+
+    </resultMap>
+
+<!--    sql代码片段-->
+    <sql id="Book_field">
+        bookId,bookName,bookIntro,bookPhoto,bookLabel,bookFree,bookPrice,bookAuthor,bookReadNums,isDelete,categoryId
+    </sql>
+    <sql id="Book_insert_field">
+        bookName,bookIntro,bookPhoto,bookLabel,bookFree,bookPrice,bookAuthor,bookReadNums,categoryId
+    </sql>
+    <sql id="Book_insert">
+        #{bookName},#{bookIntro},#{bookPhoto},#{bookLabel},#{bookFree},#{bookPrice},#{bookAuthor},#{bookReadNums},#{categoryId}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="Book_where">
+        <if test="bookId!=null">
+            and bookId=#{bookId}
+        </if>
+        <if test="bookName!=null">
+            and bookName=#{bookName}
+        </if>
+        <if test="bookIntro!=null">
+            and bookIntro=#{bookIntro}
+        </if>
+
+        <if test="bookPhoto!=null">
+            and bookPhoto=#{bookPhoto}
+        </if>
+        <if test="bookLabel!=null">
+            and bookLabel=#{bookLabel}
+        </if>
+        <if test="bookPhoto!=null">
+            and bookPhoto=#{bookPhoto}
+        </if>
+        <if test="bookFree!=null">
+            and bookFree=#{bookFree}
+        </if>
+        <if test="bookPrice!=null">
+            and bookPrice=#{bookPrice}
+        </if>
+        <if test="bookAuthor!=null">
+            and bookAuthor=#{bookAuthor}
+        </if>
+        <if test="bookReadNums!=null">
+            and bookReadNums=#{bookReadNums}
+        </if>
+        <if test="isDelete!=null">
+            and isDelete=#{isDelete}
+        </if>
+        <if test="categoryId!=null">
+            and categoryId=#{categoryId}
+        </if>
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_f">
+
+        <if test="bookName!=null">
+            bookName=#{bookName},
+        </if>
+        <if test="bookIntro!=null">
+            bookIntro=#{bookIntro},
+        </if>
+
+        <if test="bookPhoto!=null">
+            bookPhoto=#{bookPhoto},
+        </if>
+        <if test="bookLabel!=null">
+            bookLabel=#{bookLabel},
+        </if>
+        <if test="bookFree!=null">
+            bookFree=#{bookFree},
+        </if>
+        <if test="bookPrice!=null">
+            bookPrice=#{bookPrice},
+        </if>
+        <if test="bookAuthor!=null">
+            bookAuthor=#{bookAuthor},
+        </if>
+        <if test="bookReadNums!=null">
+            bookReadNums=#{bookReadNums},
+        </if>
+        <if test="isDelete!=null">
+            isDelete=#{isDelete},
+        </if>
+        <if test="scNum!=null">
+            scNum=#{scNum},
+        </if>
+        <if test="categoryId!=null">
+            categoryId=#{categoryId},
+        </if>
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="Book">
+        insert into books(<include refid="Book_insert_field"></include>) values (<include refid="Book_insert"></include>)
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from books
+        where bookId=#{BookId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="Book">
+        delete from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="Book">
+        update books
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        <where>
+            bookId=#{bookId}
+        </where>
+<!--        <where>-->
+<!--            <include refid="Book_where"></include>-->
+<!--        </where>-->
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="Book">
+        update books
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        where bookId=#{bookId} and isDelete='0'
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="booksResultMap" parameterType="map">
+        select * from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="booksResultMap" parameterType="Book">
+        select * from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="booksResultMap">
+        select <include refid="Book_field"/>
+        from books
+    </select>
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="booksDtoResultMap" parameterType="java.lang.Integer">
+        select * from books
+        where isDelete='0' and bookId=#{bookId}
+    </select>
+
+    <!--    //根据主键获取实体-->
+    <select id="load" resultMap="booksResultMap" parameterType="java.lang.Integer">
+        select * from books
+        where bookId=#{bookId}
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="booksResultMap" parameterType="map">
+        select * from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="booksResultMap" parameterType="Book">
+        select <include refid="Book_field"></include> from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="booksResultMap" parameterType="map">
+        select * from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="booksResultMap" parameterType="Book">
+        select * from books
+        <where>
+            <include refid="Book_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into books
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.bookId},#{item.bookName},#{item.bookIntro},#{item.bookPhoto},#{item.bookLabel},#{item.bookFree},#{item.bookPrice},#{item.bookAuthor},#{item.bookReadNums},#{item.isDelete},#{item.catagoryId})
+        </foreach>
+    </insert>
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update books
+            <set>
+                <if test="item.bookName!=null">
+                    bookName=#{item.bookName},
+                </if>
+                <if test="item.bookIntro!=null">
+                    bookIntro=#{item.bookIntro},
+                </if>
+                <if test="item.bookPhoto!=null">
+                    bookPhoto=#{item.bookPhoto},
+                </if>
+                <if test="item.bookLabel!=null">
+                    bookLabel=#{item.bookLabel},
+                </if>
+                <if test="item.bookFree!=null">
+                    bookFree=#{item.bookFree},
+                </if>
+                <if test="item.bookPrice!=null">
+                    bookPrice=#{item.bookPrice},
+                </if>
+                <if test="item.bookAuthor!=null">
+                    bookAuthor=#{item.bookAuthor},
+                </if>
+                <if test="item.bookReadNums!=null">
+                    bookReadNums=#{item.bookReadNums},
+                </if>
+                <if test="item.email!=null">
+                    isDelete=#{item.email},
+                </if>
+                <if test="item.categoryId!=null">
+                    categoryId=#{item.categoryId},
+                </if>
+            </set>
+            <where>
+                <if test="item.bookId!=null">
+                    bookId=#{item.bookId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="booksResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="booksResultMap">
+        ${sql}
+    </select>
+
+<!--    //执行sql返回对象，分页-->
+<!--    T getEntiryBySqlPage(@Param("sql")String sql);-->
+    <select id="getEntiryBySqlPage" resultMap="booksDtoResultMap">
+        ${sql}
+    </select>
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+    <!--    通过执行sql获得集合-->
+    <!--    List<T> getListBySql(@Param("sql")String sql);-->
+    <select id="getListBySql" resultMap="booksResultMap">
+        ${sql}
+    </select>
+
+</mapper>

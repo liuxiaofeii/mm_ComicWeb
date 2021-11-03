@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.OrderMapper">
+    <!--    实体类属性与数据库的映射-->
+    <resultMap id="ordersResultMap" type="com.mm.domain.Order">
+        <result property="orderId" column="orderId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="userId" column="userId"/>
+        <result property="orderStatus" column="orderStatus"/>
+        <result property="addTime" column="addTime"/>
+        <result property="orderTotal" column="orderTotal"/>
+        <result property="isDelete" column="isDelete"/>
+    </resultMap>
+
+
+    <resultMap id="ordersDtoResultMap" type="com.mm.domain.Order">
+        <result property="orderId" column="orderId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="userId" column="userId"/>
+        <result property="orderStatus" column="orderStatus"/>
+        <result property="addTime" column="addTime"/>
+        <result property="orderTotal" column="orderTotal"/>
+        <result property="isDelete" column="isDelete"/>
+        <association property="user" column="userId" select="com.mm.mapper.UserMapper.load" />
+        <association property="orderDetails" column="orderId" select="com.mm.mapper.OrderDetailMapper.getListById" />
+
+
+
+    </resultMap>
+
+<!--    sql代码片段-->
+    <sql id="Order_field">
+        orderId,bookId,userId,orderStatus,addTime,orderTotal
+    </sql>
+    <sql id="Order_insert_field">
+        orderId,bookId,userId,orderStatus,addTime,orderTotal
+    </sql>
+    <sql id="Order_insert">
+        #{bookId},#{userId},#{orderStatus},#{addTime},#{orderTotal}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="Order_where">
+        <if test="orderId!=null">
+            and orderId=#{orderId}
+        </if>
+        <if test="bookId!=null">
+            and bookId=#{bookId}
+        </if>
+        <if test="userId!=null">
+            and userId=#{userId}
+        </if>
+
+        <if test="orderStatus!=null">
+            and orderStatus=#{orderStatus}
+        </if>
+        <if test="addTime!=null">
+            and addTime=#{addTime}
+        </if>
+        <if test="orderTotal!=null">
+            and orderTotal=#{orderTotal}
+        </if>
+
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_f">
+
+        <if test="bookId!=null">
+            bookId=#{bookId},
+        </if>
+        <if test="userId!=null">
+            userId=#{userId},
+        </if>
+
+        <if test="orderStatus!=null">
+            orderStatus=#{orderStatus},
+        </if>
+        <if test="addTime!=null">
+            addTime=#{addTime},
+        </if>
+        <if test="orderTotal!=null">
+            orderTotal=#{orderTotal},
+        </if>
+
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
+        insert into orders(userId,orderStatus,addTime,orderTotal) values(#{userId},#{orderStatus},now(),#{orderTotal})
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from orders
+        where orderId=#{orderId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="Order">
+        delete from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="Order">
+        update orders
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        <where>
+            orderId=#{orderId}
+        </where>
+<!--        <where>-->
+<!--            <include refid="Order_where"></include>-->
+<!--        </where>-->
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="Order">
+        update orders
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        where orderId=#{orderId}
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="ordersResultMap" parameterType="map">
+        select * from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="ordersResultMap" parameterType="Order">
+        select * from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="ordersResultMap">
+        select <include refid="Order_field"/>
+        from orders
+    </select>
+
+    <select id="findAll" resultMap="ordersDtoResultMap">
+        select *
+        from orders
+    </select>
+
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+    <select id="load" resultMap="ordersResultMap" parameterType="java.lang.Integer">
+        select * from orders
+        where orderId=#{orderId}
+    </select>
+
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="ordersResultMap" parameterType="java.lang.Integer">
+        select * from orders
+        where orderId=#{orderId}
+    </select>
+
+<!--    根据主键获取实体：select实体类型-->
+    <select id="getListById" resultMap="ordersDtoResultMap">
+        select * from orders
+        where orderId=#{orderId}
+    </select>
+
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="ordersResultMap" parameterType="map">
+        select * from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="ordersResultMap" parameterType="Order">
+        select * from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="ordersResultMap" parameterType="map">
+        select * from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="ordersResultMap" parameterType="Order">
+        select * from orders
+        <where>
+            <include refid="Order_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into orders
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.orderId},#{item.bookId},#{item.userId},#{item.orderStatus},#{item.addTime},#{item.orderTotal}
+        </foreach>
+    </insert>
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update orders
+            <set>
+                <if test="item.bookId!=null">
+                    bookId=#{item.bookId},
+                </if>
+                <if test="item.userId!=null">
+                    orderId=#{item.userId},
+                </if>
+                <if test="item.orderStatus!=null">
+                    orderStatus=#{item.orderStatus},
+                </if>
+                <if test="item.addTime!=null">
+                    addTime=#{item.addTime},
+                </if>
+                <if test="item.orderTotal!=null">
+                    orderTotal=#{item.orderTotal},
+                </if>
+
+
+            </set>
+            <where>
+                <if test="item.orderId!=null">
+                    orderId=#{item.orderId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="ordersResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="ordersResultMap">
+        ${sql}
+    </select>
+
+    <select id="getListEntiryBySql" resultMap="ordersDtoResultMap">
+        ${sql}
+    </select>
+
+<!--    //执行sql返回对象，分页-->
+<!--    T getEntiryBySqlPage(@Param("sql")String sql);-->
+    <select id="getEntiryBySqlPage" resultMap="ordersResultMap">
+        ${sql}
+    </select>
+
+
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+
+
+</mapper>

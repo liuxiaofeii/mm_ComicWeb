@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.ContentMapper">
+    <resultMap id="contentsResultMap" type="com.mm.domain.Content">
+        <result property="contentId" column="contentId"/>
+        <result property="contentNum" column="contentNum"/>
+        <result property="contentNumId" column="contentNumId"/>
+        <result property="bookId" column="bookId"/>
+    </resultMap>
+
+    <sql id="content_field">
+        contentNum,contentNumId,bookId
+    </sql>
+    <sql id="content_insert">
+        #{contentNum},#{contentNumId},#{bookId}
+    </sql>
+    <sql id="content_where">
+        <if test="contentNum!=null">
+            and contentNum=#{contentNum}
+        </if>
+        <if test="contentNumId!=null">
+            and contentNumId=#{contentNumId}
+        </if>
+        <if test="bookId!=null">
+            and bookId=#{bookId}
+        </if>
+    </sql>
+
+    <sql id="update_where">
+
+    </sql>
+    <sql id="insert_where">
+
+    </sql>
+    <select id="load" resultMap="contentsResultMap" parameterType="java.lang.Integer">
+        select distinct contentNum,bookId from contents
+        where bookId=#{bookId}
+    </select>
+    <select id="selectByEntiry" resultMap="contentsResultMap" parameterType="Content">
+        select * from contents
+        <where>
+            <include refid="content_where"></include>
+        </where>
+        order by contentNumId
+    </select>
+</mapper>

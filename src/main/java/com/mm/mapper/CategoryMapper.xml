@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.CategoryMapper">
+    <!--    实体类属性与数据库的映射-->
+<!--    <resultMap id="CategorysResultMap" type="Category">-->
+<!--        <result property="id" column="CategoryId"/>-->
+<!--        <result property="name" column="CategoryName"/>-->
+<!--        <result property="password" column="password"/>-->
+<!--        <result property="phone" column="phone"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--    </resultMap>-->
+    <resultMap id="categorysResultMap" type="com.mm.domain.Category">
+        <result property="categoryId" column="categoryId"/>
+        <result property="categoryName" column="categoryName"/>
+        <result property="isDelete" column="isDelete"/>
+
+
+    </resultMap>
+
+<!--    sql代码片段-->
+    <sql id="Category_field">
+        categoryId,categoryName,isDelete
+    </sql>
+    <sql id="Category_insert">
+        #{categoryId},#{categoryName},#{isDelete}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="Category_where">
+        <if test="categoryId!=null">
+            and categoryId=#{categoryId}
+        </if>
+        <if test="categoryName!=null">
+            and categoryName=#{categoryName}
+        </if>
+        <if test="isDelete!=null">
+            and isDelete=#{isDelete}
+        </if>
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_where">
+
+        <if test="categoryName!=null">
+            categoryName=#{categoryName},
+        </if>
+        <if test="isDelete!=null">
+            isDelete=#{isDelete},
+        </if>
+    </sql>
+    <!--    更新的条件-->
+    <sql id="insert_where">
+
+        <if test="categoryName!=null">
+            categoryName=#{categoryName},
+        </if>
+        <if test="isDelete!=null">
+            isDelete=#{isDelete}
+        </if>
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="Category">
+        insert into categorys(categoryName) values (#{categoryName})
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from categorys
+        where categoryId=#{categoryId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="Category">
+        delete from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="Category">
+        update categorys
+        <set>
+            <include refid="update_where"></include>
+        </set>
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="Category">
+        update categorys
+        <set>
+            <include refid="update_where"></include>
+        </set>
+        where categoryId=#{categoryId}
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="categorysResultMap" parameterType="map">
+        select * from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="categorysResultMap" parameterType="Category">
+        select * from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="categorysResultMap">
+        select <include refid="Category_field"/>
+        from categorys
+    </select>
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+    <!--    //根据主键获取实体-->
+    <select id="load" resultMap="categorysResultMap" parameterType="java.lang.Integer">
+        select * from categorys
+        where categoryId=#{categoryId}
+    </select>
+
+
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="categorysResultMap" parameterType="java.lang.Integer">
+        select * from categorys
+        where isDelete='0' and categoryId=#{categoryId}
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="categorysResultMap" parameterType="map">
+        select * from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="categorysResultMap" parameterType="Category">
+        select <include refid="Category_field"></include> from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="categorysResultMap" parameterType="map">
+        select * from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="categorysResultMap" parameterType="Category">
+        select * from categorys
+        <where>
+            <include refid="Category_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into categorys
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.categoryId},#{item.categoryName},#{item.isDelete})
+        </foreach>
+    </insert>
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update categorys
+            <set>
+                <if test="item.categoryName!=null">
+                    categoryName=#{item.categoryName},
+                </if>
+                <if test="item.isDelete!=null">
+                    categoryName=#{item.isDelete},
+                </if>
+            </set>
+            <where>
+                <if test="item.categoryId!=null">
+                    categoryId=#{item.categoryId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="categorysResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="categorysResultMap">
+        ${sql}
+    </select>
+
+<!--    //执行sql返回对象，分页-->
+<!--    T getEntiryBySqlPage(@Param("sql")String sql);-->
+    <select id="getEntiryBySqlPage" resultMap="categorysResultMap">
+        ${sql}
+    </select>
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+<!--    通过执行sql获得集合-->
+<!--    List<T> getListBySql(@Param("sql")String sql);-->
+    <select id="getListBySql" resultMap="categorysResultMap">
+        ${sql}
+    </select>
+
+</mapper>

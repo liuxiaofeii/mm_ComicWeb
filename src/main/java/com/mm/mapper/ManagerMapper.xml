@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.ManagerMapper">
+    <!--    实体类属性与数据库的映射-->
+<!--    <resultMap id="managersResultMap" type="Manager">-->
+<!--        <result property="id" column="managerId"/>-->
+<!--        <result property="name" column="managerName"/>-->
+<!--        <result property="password" column="password"/>-->
+<!--        <result property="phone" column="phone"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--    </resultMap>-->
+    <resultMap id="managersResultMap" type="com.mm.domain.Manager">
+        <result property="managerId" column="managerId" jdbcType="VARCHAR"/>
+        <result property="managerName" column="managerName" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+    </resultMap>
+
+<!--    sql代码片段-->
+    <sql id="Manager_field">
+        managerId,managerName,password,phone,email
+    </sql>
+    <sql id="Manager_insert">
+        #{managerId},#{managerName},#{password},#{phone},#{email}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="Manager_where">
+        <if test="managerId!=null">
+            and managerId=#{managerId}
+        </if>
+        <if test="managerName!=null">
+            and managerName=#{managerName}
+        </if>
+        <if test="password!=null">
+            and password=#{password}
+        </if>
+        <if test="phone!=null">
+            and phone=#{phone}
+        </if>
+        <if test="email!=null">
+            and email=#{email}
+        </if>
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_where">
+        <if test="managerName!=null">
+            and managerName=#{managerName},
+        </if>
+        <if test="password!=null">
+            and password=#{password},
+        </if>
+        <if test="phone!=null">
+            and phone=#{phone},
+        </if>
+        <if test="email!=null">
+            and email=#{email},
+        </if>
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="Manager">
+        insert into managers values (<include refid="Manager_insert"></include>)
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from managers
+        where managerId=#{managerId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="Manager">
+        delete from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="Manager">
+        update managers
+        <set>
+            <include refid="update_where"></include>
+        </set>
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="Manager">
+        <set>
+            <include refid="update_where"></include>
+        </set>
+        where managerId=#{managerId}
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="managersResultMap" parameterType="map">
+        select * from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="managersResultMap" parameterType="Manager">
+        select * from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="managersResultMap">
+        select <include refid="Manager_field"/>
+        from managers
+    </select>
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="managersResultMap" parameterType="java.lang.Integer">
+        select * from managers
+        where managerId=#{managerId}
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="managersResultMap" parameterType="map">
+        select * from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="managersResultMap" parameterType="Manager">
+        select <include refid="Manager_field"></include> from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="managersResultMap" parameterType="map">
+        select * from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="managersResultMap" parameterType="Manager">
+        select * from managers
+        <where>
+            <include refid="Manager_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into managers
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.managerId},#{item.managerName},#{item.password},#{item.phone},#{item.email})
+        </foreach>
+    </insert>
+
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update managers
+            <set>
+                <if test="item.managerName!=null">
+                    managerName=#{item.managerName},
+                </if>
+                <if test="item.password!=null">
+                    password=#{item.password},
+                </if>
+                <if test="item.phone!=null">
+                    phone=#{item.phone},
+                </if>
+                <if test="item.email=null">
+                    email=#{item.email},
+                </if>
+            </set>
+            <where>
+                <if test="item.id!=null">
+                    managerId=#{managerId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="managersResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="managersResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+
+
+</mapper>

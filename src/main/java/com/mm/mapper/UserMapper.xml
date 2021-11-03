@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.UserMapper">
+    <!--    实体类属性与数据库的映射-->
+<!--    <resultMap id="UsersResultMap" type="User">-->
+<!--        <result property="id" column="UserId"/>-->
+<!--        <result property="name" column="UserName"/>-->
+<!--        <result property="password" column="password"/>-->
+<!--        <result property="phone" column="phone"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--    </resultMap>-->
+    <resultMap id="usersResultMap" type="com.mm.domain.User">
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="realName" column="realName"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="address" column="address"/>
+        <result property="isDelete" column="isDelete"/>
+        
+    </resultMap>
+
+<!--    sql代码片段-->
+    <sql id="User_field">
+        userId,userName,realName,password,phone,email,address,isDelete
+    </sql>
+    <sql id="User_insert_field">
+        userName,realName,password,phone,email,address
+    </sql>
+    <sql id="User_insert">
+        #{userName},#{realName},#{password},#{phone},#{email},#{address}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="User_where">
+        <if test="userId!=null">
+            and userId=#{userId}
+        </if>
+        <if test="userName!=null">
+            and userName=#{userName}
+        </if>
+        <if test="realName!=null">
+            and realName=#{realName}
+        </if>
+
+        <if test="password!=null">
+            and password=#{password}
+        </if>
+        <if test="phone!=null">
+            and phone=#{phone}
+        </if>
+        <if test="password!=null">
+            and password=#{password}
+        </if>
+        <if test="email!=null">
+            and email=#{email}
+        </if>
+        <if test="address!=null">
+            and address=#{address}
+        </if>
+
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_f">
+
+        <if test="userName!=null">
+            userName=#{userName},
+        </if>
+        <if test="realName!=null">
+            realName=#{realName},
+        </if>
+
+        <if test="password!=null">
+            password=#{password},
+        </if>
+        <if test="phone!=null">
+            phone=#{phone},
+        </if>
+        <if test="email!=null">
+            email=#{email},
+        </if>
+        <if test="address!=null">
+            address=#{address},
+        </if>
+        <if test="isDelete!=null">
+            isDelete=#{isDelete},
+        </if>
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="User">
+        insert into users(userName,realName,password,phone,email,address) values(#{userName},#{realName},#{password},#{phone},#{email},#{address})
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from users
+        where userId=#{UserId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="User">
+        delete from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="User">
+        update users
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        <where>
+            userId=#{userId}
+        </where>
+<!--        <where>-->
+<!--            <include refid="User_where"></include>-->
+<!--        </where>-->
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="User">
+        update users
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        where userId=#{userId} and isDelete='0'
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="usersResultMap" parameterType="map">
+        select * from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="usersResultMap" parameterType="User">
+        select * from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="usersResultMap">
+        select <include refid="User_field"/>
+        from users
+    </select>
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="usersResultMap" parameterType="java.lang.Integer">
+        select * from users
+        where isDelete='0' and userId=#{UserId}
+    </select>
+
+    <!--    //根据主键获取实体-->
+    <select id="load" resultMap="usersResultMap" parameterType="java.lang.Integer">
+        select * from users
+        where userId=#{userId}
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="usersResultMap" parameterType="map">
+        select * from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="usersResultMap" parameterType="User">
+        select * from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="usersResultMap" parameterType="map">
+        select * from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="usersResultMap" parameterType="User">
+        select * from users
+        <where>
+            <include refid="User_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into users
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.userId},#{item.userName},#{item.realName},#{item.password},#{item.phone},#{item.email},#{item.address})
+        </foreach>
+    </insert>
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update users
+            <set>
+                <if test="item.userName!=null">
+                    userName=#{item.userName},
+                </if>
+                <if test="item.realName!=null">
+                    realName=#{item.realName},
+                </if>
+                <if test="item.password!=null">
+                    password=#{item.password},
+                </if>
+                <if test="item.phone!=null">
+                    phone=#{item.phone},
+                </if>
+                <if test="item.email!=null">
+                    email=#{item.email},
+                </if>
+                <if test="address!=null">
+                    address=#{address},
+                </if>
+
+            </set>
+            <where>
+                <if test="item.userId!=null">
+                    userId=#{item.userId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="usersResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="usersResultMap">
+        ${sql}
+    </select>
+
+<!--    //执行sql返回对象，分页-->
+<!--    T getEntiryBySqlPage(@Param("sql")String sql);-->
+    <select id="getEntiryBySqlPage" resultMap="usersResultMap">
+        ${sql}
+    </select>
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+
+
+</mapper>

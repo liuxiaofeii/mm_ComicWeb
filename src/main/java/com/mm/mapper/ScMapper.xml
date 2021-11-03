@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.ScMapper">
+    <!--    实体类属性与数据库的映射-->
+    <resultMap id="scsResultMap" type="com.mm.domain.Sc">
+        <result property="scId" column="scId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="userId" column="userId"/>
+    </resultMap>
+
+
+    <resultMap id="scsDtoResultMap" type="com.mm.domain.Sc">
+        <result property="scId" column="scId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="userId" column="userId"/>
+        <association property="book" column="bookId" select="com.mm.mapper.BookMapper.load"/>
+
+    </resultMap>
+
+
+<!--    sql代码片段-->
+    <sql id="Sc_field">
+        scId,bookId,userId
+    </sql>
+    <sql id="Sc_insert_field">
+        scId,bookId,userId
+    </sql>
+    <sql id="Sc_insert">
+        #{bookId},#{userId}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="Sc_where">
+        <if test="scId!=null">
+            and scId=#{scId}
+        </if>
+        <if test="bookId!=null">
+            and bookId=#{bookId}
+        </if>
+        <if test="userId!=null">
+            and userId=#{userId}
+        </if>
+
+
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_f">
+
+        <if test="bookId!=null">
+            bookId=#{bookId},
+        </if>
+        <if test="userId!=null">
+            userId=#{userId},
+        </if>
+
+
+
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="Sc">
+        insert into scs(bookId,userId) values(#{bookId},#{userId})
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from scs
+        where scId=#{scId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="Sc">
+        delete from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="Sc">
+        update scs
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        <where>
+            scId=#{scId}
+        </where>
+<!--        <where>-->
+<!--            <include refid="Sc_where"></include>-->
+<!--        </where>-->
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="Sc">
+        update scs
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        where scId=#{scId}
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="scsResultMap" parameterType="map">
+        select * from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="scsResultMap" parameterType="Sc">
+        select * from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="scsResultMap">
+        select <include refid="Sc_field"/>
+        from scs
+    </select>
+    <select id="findAll" resultMap="scsDtoResultMap">
+        select <include refid="Sc_field"/>
+        from scs
+    </select>
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+    <select id="load" resultMap="scsResultMap" parameterType="java.lang.Integer">
+        select * from scs
+        where scId=#{scId}
+    </select>
+
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="scsResultMap" parameterType="java.lang.Integer">
+        select * from scs
+        where scId=#{scId}
+    </select>
+
+    <select id="getListById" resultMap="scsDtoResultMap" parameterType="java.lang.Integer">
+        select * from scs
+        where userId=#{userId}
+    </select>
+
+<!--    根据主键获取实体：select实体类型-->
+    <!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById2" resultMap="scsResultMap">
+        select scId,bookId,scs.userId,userName from scs,users
+        where scs.userId=users.userId
+    </select>
+
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="scsResultMap" parameterType="map">
+        select * from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="scsResultMap" parameterType="Sc">
+        select * from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="scsResultMap" parameterType="map">
+        select * from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="scsResultMap" parameterType="Sc">
+        select * from scs
+        <where>
+            <include refid="Sc_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into scs
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.scId},#{item.bookId},#{item.userId}
+        </foreach>
+    </insert>
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update scs
+            <set>
+                <if test="item.bookId!=null">
+                    bookId=#{item.bookId},
+                </if>
+                <if test="item.userId!=null">
+                    userId=#{item.userId},
+                </if>
+
+
+
+            </set>
+            <where>
+                <if test="item.scId!=null">
+                    scId=#{item.scId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="scsResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="scsResultMap">
+        ${sql}
+    </select>
+
+    <select id="getListEntiryBySql" resultMap="scsDtoResultMap">
+        ${sql}
+    </select>
+
+<!--    //执行sql返回对象，分页-->
+<!--    T getEntiryBySqlPage(@Param("sql")String sql);-->
+    <select id="getEntiryBySqlPage" resultMap="scsDtoResultMap">
+        ${sql}
+    </select>
+
+
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+
+
+</mapper>

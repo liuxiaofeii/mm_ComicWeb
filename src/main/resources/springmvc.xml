@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:Context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<!--<import resource="classpath:ApplicationContext_dao.xml"/>-->
+<!--    <import resource="classpath:ApplicationContext_service.xml"/>-->
+    <Context:component-scan base-package="com.mm.controller"/>
+<!--   加上这句会报错,无法创建SqlSessionFactory <import resource="classpath:ApplicationContext_dao.xml"/>-->
+
+<!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+<!--把spring无法解析的页面默认交给tomcat处理-->
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven></mvc:annotation-driven>
+</beans>

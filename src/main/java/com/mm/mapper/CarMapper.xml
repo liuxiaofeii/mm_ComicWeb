@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.CarMapper">
+    <!--    实体类属性与数据库的映射-->
+<!--    <resultMap id="CarsResultMap" type="Car">-->
+<!--        <result property="id" column="CarId"/>-->
+<!--        <result property="name" column="CarName"/>-->
+<!--        <result property="bookPrice" column="bookPrice"/>-->
+<!--        <result property="purchaseNum" column="purchaseNum"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--    </resultMap>-->
+    <resultMap id="carsResultMap" type="com.mm.domain.Car">
+        <result property="carId" column="carId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="userId" column="userId"/>
+        <result property="bookPrice" column="bookPrice"/>
+        <result property="purchaseNum" column="purchaseNum"/>
+        <result property="purchaseTotal" column="purchaseTotal"/>
+<!--    无法复用    -->
+<!--        <association property="user" javaType="User">-->
+<!--            <id column="userId" property="userId"/>-->
+<!--            <result column="userName" property="userName"/>-->
+<!--        </association>-->
+
+<!--       可以复用-->
+<!--        <association property="user" javaType="User" resultMap="userMap"/>-->
+
+    </resultMap>
+    
+<!--    <resultMap id="userMap" type="User">-->
+<!--        <id column="userId" property="userId"/>-->
+<!--        <result column="userName" property="userName"/>-->
+<!--    </resultMap>-->
+
+    <resultMap id="carsDtoResultMap" type="com.mm.domain.Car">
+        <result property="carId" column="carId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="userId" column="userId"/>
+        <result property="bookPrice" column="bookPrice"/>
+        <result property="purchaseNum" column="purchaseNum"/>
+        <result property="purchaseTotal" column="purchaseTotal"/>
+        <!--    无法复用    -->
+        <!--        <association property="user" javaType="User">-->
+        <!--            <id column="userId" property="userId"/>-->
+        <!--            <result column="userName" property="userName"/>-->
+        <!--        </association>-->
+
+        <!--       可以复用-->
+        <association property="book" column="bookId" select="com.mm.mapper.BookMapper.load" />
+
+    </resultMap>
+
+<!--    sql代码片段-->
+    <sql id="Car_field">
+        carId,bookId,userId,bookPrice,purchaseNum,purchaseTotal
+    </sql>
+    <sql id="Car_insert_field">
+        carId,bookId,userId,bookPrice,purchaseNum,purchaseTotal
+    </sql>
+    <sql id="Car_insert">
+        #{bookId},#{userId},#{bookPrice},#{purchaseNum},#{purchaseTotal}
+    </sql>
+    <!--     实体类需要用到的if   -->
+    <sql id="Car_where">
+        <if test="carId!=null">
+            and carId=#{carId}
+        </if>
+        <if test="bookId!=null">
+            and bookId=#{bookId}
+        </if>
+        <if test="userId!=null">
+            and userId=#{userId}
+        </if>
+
+        <if test="bookPrice!=null">
+            and bookPrice=#{bookPrice}
+        </if>
+        <if test="purchaseNum!=null">
+            and purchaseNum=#{purchaseNum}
+        </if>
+        <if test="purchaseTotal!=null">
+            and purchaseTotal=#{purchaseTotal}
+        </if>
+
+    </sql>
+    <!--    更新的条件-->
+    <sql id="update_f">
+
+        <if test="bookId!=null">
+            bookId=#{bookId},
+        </if>
+        <if test="userId!=null">
+            userId=#{userId},
+        </if>
+
+        <if test="bookPrice!=null">
+            bookPrice=#{bookPrice},
+        </if>
+        <if test="purchaseNum!=null">
+            purchaseNum=#{purchaseNum},
+        </if>
+        <if test="purchaseTotal!=null">
+            purchaseTotal=#{purchaseTotal},
+        </if>
+
+    </sql>
+
+
+
+
+<!--    /**-->
+<!--    * 增删改查-->
+<!--    */-->
+<!--    //插入一个对象，返回值是int-->
+<!--    int insert(T entiry);-->
+    <insert id="insert" parameterType="Car">
+        insert into cars(bookId,userId,bookPrice,purchaseNum,purchaseTotal) values(#{bookId},#{userId},#{bookPrice},#{purchaseNum},#{purchaseTotal})
+    </insert>
+
+<!--    /******删除******/-->
+<!--    //通过id删除-->
+<!--    void deleteById(Serializable id);-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from cars
+        where carId=#{carId}
+    </delete>
+<!--    //通过实体类删除-->
+<!--    void deleteByEntiry(T entiry);-->
+    <delete id="deleteByEntiry" parameterType="Car">
+        delete from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </delete>
+
+<!--    //通过map删除-->
+<!--    void deleteByMap(Map<String,Object> params);-->
+    <delete id="deleteByMap" parameterType="map">
+        delete from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </delete>
+
+<!--    /******修改******/-->
+<!--    //通过实体类修改-->
+<!--    void update(T entiry);-->
+    <update id="update" parameterType="Car">
+        update cars
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        <where>
+            carId=#{carId}
+        </where>
+<!--        <where>-->
+<!--            <include refid="Car_where"></include>-->
+<!--        </where>-->
+    </update>
+
+<!--    //通过id进行修改-->
+<!--    void updateById(T entiry);-->
+    <update id="updateById" parameterType="Car">
+        update cars
+        <set>
+            <include refid="update_f"></include>
+        </set>
+        where carId=#{carId}
+    </update>
+
+<!--    /******查询******/-->
+<!--    //根据参数查询-->
+<!--    List<T> selectByMap(Map<String,Object> params);-->
+    <select id="selectByMap" resultMap="carsResultMap" parameterType="map">
+        select * from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体查询-->
+<!--    List<T> selectByEntiry(T entiry);-->
+    <select id="selectByEntiry" resultMap="carsResultMap" parameterType="Car">
+        select * from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </select>
+
+<!--    //列出所有-->
+<!--    List<T> listAll();-->
+    <select id="listAll" resultMap="carsResultMap">
+        select <include refid="Car_field"/>
+        from cars
+    </select>
+
+<!--    /******查询******/-->
+<!--    //根据主键获取实体-->
+    <select id="load" resultMap="carsResultMap" parameterType="java.lang.Integer">
+        select * from cars
+        where carId=#{carId}
+    </select>
+
+<!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById" resultMap="carsResultMap" parameterType="java.lang.Integer">
+        select * from cars
+        where carId=#{carId}
+    </select>
+
+<!--    根据主键获取实体：select实体类型-->
+    <!--    T getEntiryById(Serializable id);-->
+    <select id="getEntiryById2" resultMap="carsResultMap">
+        select carId,bookId,cars.userId,bookPrice,purchaseNum,purchaseTotal,userName from cars,users
+        where cars.userId=users.userId
+    </select>
+
+
+<!--    //根据map获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByMap(Map<String,Object> params);-->
+    <select id="getEntiryByMap" resultMap="carsResultMap" parameterType="map">
+        select * from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;不分页-->
+<!--    T getEntiryByEntiry(T entiry);-->
+    <select id="getEntiryByEntiry" resultMap="carsResultMap" parameterType="Car">
+        select * from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </select>
+
+<!--    //根据map获取实体&#45;&#45;分页-->
+<!--    T getEntiryByMapPage(Map<String,Object> params);-->
+    <select id="getEntiryByMapPage" resultMap="carsResultMap" parameterType="map">
+        select * from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </select>
+
+<!--    //根据实体获取实体&#45;&#45;分页-->
+<!--    T getEntiryByEntiryPage(T entiry);-->
+    <select id="getEntiryByEntiryPage" resultMap="carsResultMap" parameterType="Car">
+        select * from cars
+        <where>
+            <include refid="Car_where"></include>
+        </where>
+    </select>
+<!--    /******批量******/-->
+<!--    //批量增加-->
+<!--    int insertBatch(List<T> list);-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into cars
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.carId},#{item.bookId},#{item.userId},#{item.bookPrice},#{item.purchaseNum},#{item.purchaseTotal}
+        </foreach>
+    </insert>
+<!--    //批量修改 通过id-->
+<!--    void updateBatch(List<T> list);-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update cars
+            <set>
+                <if test="item.bookId!=null">
+                    bookId=#{item.bookId},
+                </if>
+                <if test="item.userId!=null">
+                    userId=#{item.userId},
+                </if>
+                <if test="item.bookPrice!=null">
+                    bookPrice=#{item.bookPrice},
+                </if>
+                <if test="item.purchaseNum!=null">
+                    purchaseNum=#{item.purchaseNum},
+                </if>
+                <if test="item.purchaseTotal!=null">
+                    purchaseTotal=#{item.purchaseTotal},
+                </if>
+
+
+            </set>
+            <where>
+                <if test="item.carId!=null">
+                    carId=#{item.carId}
+                </if>
+            </where>
+        </foreach>
+    </update>
+
+<!--    /******通过sql******/-->
+<!--    //通过执行sql返回map-->
+<!--    Map<String,Object> getMapBySql(@Param("sql")String sql);-->
+    <select id="getMapBySql" resultMap="carsResultMap">
+        ${sql}
+    </select>
+
+<!--    //通过执行sql返回Entiry-->
+<!--    T getEntiryBySql(@Param("sql")String sql);-->
+    <select id="getEntiryBySql" resultMap="carsResultMap">
+        ${sql}
+    </select>
+
+    <select id="getListEntiryBySql" resultMap="carsDtoResultMap">
+        ${sql}
+    </select>
+
+<!--    //执行sql返回对象，分页-->
+<!--    T getEntiryBySqlPage(@Param("sql")String sql);-->
+    <select id="getEntiryBySqlPage" resultMap="carsResultMap">
+        ${sql}
+    </select>
+
+
+<!--    //通过sql修改-->
+<!--    void updateBySql(@Param("sql")String sql);-->
+    <update id="updateBySql">
+        ${sql}
+    </update>
+
+<!--    //通过sql删除-->
+<!--    void deleteBySql(@Param("sql")String sql);-->
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+
+
+</mapper>
