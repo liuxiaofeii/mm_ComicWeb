@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="project5:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="065cd689-1bdc-4fd1-9873-1221e523137d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="myBatis-mapper" />
+        <option value="Class" />
+        <option value="Jsp File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="H:\tt\apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="H:\tt\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1qNvvHp7NIJ4nZXrefHeIrs39Gv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.obroom.plugin.mybatislog.indexNum" value="4689" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3383915" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\project_idea\java\springmvc\project5\src\main\webapp\WEB-INF\jsp\item" />
+      <recent name="H:\project_idea\java\springmvc\project5\src\main\webapp\WEB-INF\jsp\sc" />
+      <recent name="H:\project_idea\java\springmvc\project5\src\main\webapp\WEB-INF\jsp" />
+      <recent name="H:\project_idea\java\springmvc\project5\src\main\java\com\mm\mapper" />
+      <recent name="H:\project_idea\java\springmvc\project5\src\main\webapp\WEB-INF\jsp\order" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\project_idea\java\springmvc\project5\src\main\webapp" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mm.domain" />
+      <recent name="com.mm.util" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.37">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSpring.testSpring5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mm" />
+      <option name="MAIN_CLASS_NAME" value="com.mm.TestSpring" />
+      <option name="METHOD_NAME" value="testSpring5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSpring.testSpring6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mm" />
+      <option name="MAIN_CLASS_NAME" value="com.mm.TestSpring" />
+      <option name="METHOD_NAME" value="testSpring6" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSpring.testSpring7" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mm" />
+      <option name="MAIN_CLASS_NAME" value="com.mm.TestSpring" />
+      <option name="METHOD_NAME" value="testSpring7" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSpring.testSpring8" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mm" />
+      <option name="MAIN_CLASS_NAME" value="com.mm.TestSpring" />
+      <option name="METHOD_NAME" value="testSpring8" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSpring.testSpring9" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mm" />
+      <option name="MAIN_CLASS_NAME" value="com.mm.TestSpring" />
+      <option name="METHOD_NAME" value="testSpring9" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 9.0.37" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.37" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8201/project5/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="project5:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/project5" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="3912fb0f-410e-4a66-80ad-09f56189de64" />
+        <option name="HTTP_PORT" value="8201" />
+        <option name="JNDI_PORT" value="1201" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="56503" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="project5:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.TestSpring.testSpring5" />
+      <item itemvalue="JUnit.TestSpring.testSpring6" />
+      <item itemvalue="JUnit.TestSpring.testSpring7" />
+      <item itemvalue="JUnit.TestSpring.testSpring8" />
+      <item itemvalue="JUnit.TestSpring.testSpring9" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.37" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TestSpring.testSpring9" />
+        <item itemvalue="JUnit.TestSpring.testSpring8" />
+        <item itemvalue="JUnit.TestSpring.testSpring7" />
+        <item itemvalue="JUnit.TestSpring.testSpring6" />
+        <item itemvalue="JUnit.TestSpring.testSpring5" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="065cd689-1bdc-4fd1-9873-1221e523137d" name="Default Changelist" comment="" />
+      <created>1616933091921</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616933091921</updated>
+      <workItem from="1616933093022" duration="6737000" />
+      <workItem from="1617005919981" duration="15307000" />
+      <workItem from="1617081640284" duration="20265000" />
+      <workItem from="1617150209889" duration="1563000" />
+      <workItem from="1617166420982" duration="25995000" />
+      <workItem from="1617279394703" duration="6190000" />
+      <workItem from="1617322861300" duration="17000" />
+      <workItem from="1617596169895" duration="12714000" />
+      <workItem from="1617757449995" duration="761000" />
+      <workItem from="1617772885802" duration="17000" />
+      <workItem from="1617946786882" duration="1773000" />
+      <workItem from="1618019940996" duration="281000" />
+      <workItem from="1618020783977" duration="201000" />
+      <workItem from="1618021312778" duration="143000" />
+      <workItem from="1618031270452" duration="12000" />
+      <workItem from="1618204488419" duration="5774000" />
+      <workItem from="1618279943135" duration="18000" />
+      <workItem from="1618319336272" duration="1173000" />
+      <workItem from="1618320998363" duration="1214000" />
+      <workItem from="1618323207046" duration="540000" />
+      <workItem from="1618359167788" duration="4050000" />
+      <workItem from="1618376705423" duration="10951000" />
+      <workItem from="1618400241003" duration="8458000" />
+      <workItem from="1618463850014" duration="100000" />
+      <workItem from="1618490578525" duration="2210000" />
+      <workItem from="1618559401412" duration="15000" />
+      <workItem from="1618639267104" duration="7679000" />
+      <workItem from="1618657719417" duration="17644000" />
+      <workItem from="1618895739455" duration="1468000" />
+      <workItem from="1618918819793" duration="1246000" />
+      <workItem from="1620454392330" duration="776000" />
+      <workItem from="1620561976892" duration="1784000" />
+      <workItem from="1620620834302" duration="622000" />
+      <workItem from="1620622740200" duration="1636000" />
+      <workItem from="1620624585920" duration="825000" />
+      <workItem from="1620626395087" duration="882000" />
+      <workItem from="1620627317730" duration="1294000" />
+      <workItem from="1620629470036" duration="208000" />
+      <workItem from="1620629898554" duration="746000" />
+      <workItem from="1620631779128" duration="1181000" />
+      <workItem from="1620633685589" duration="64000" />
+      <workItem from="1620633802835" duration="1076000" />
+      <workItem from="1620635432129" duration="3993000" />
+      <workItem from="1620705232095" duration="5814000" />
+      <workItem from="1620725792745" duration="21000" />
+      <workItem from="1620734302243" duration="6958000" />
+      <workItem from="1620801182265" duration="2080000" />
+      <workItem from="1620808720067" duration="800000" />
+      <workItem from="1620819035605" duration="7065000" />
+      <workItem from="1620868222966" duration="8424000" />
+      <workItem from="1621577691894" duration="310000" />
+      <workItem from="1621585567376" duration="1641000" />
+      <workItem from="1621659188772" duration="20000" />
+      <workItem from="1621839356289" duration="843000" />
+      <workItem from="1622075022193" duration="15032000" />
+      <workItem from="1622178322640" duration="5829000" />
+      <workItem from="1622190154327" duration="330000" />
+      <workItem from="1622190919400" duration="100000" />
+      <workItem from="1630903899739" duration="1739000" />
+      <workItem from="1630910261952" duration="5241000" />
+      <workItem from="1631270035212" duration="54000" />
+      <workItem from="1631533201300" duration="19000" />
+      <workItem from="1635751074568" duration="475000" />
+      <workItem from="1635751635680" duration="55000" />
+      <workItem from="1635899988837" duration="1905000" />
+      <workItem from="1635909801506" duration="1532000" />
+    </task>
+    <task id="LOCAL-00001" summary="图片添加">
+      <created>1635911173519</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635911173519</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="图片添加" />
+    <option name="LAST_COMMIT_MESSAGE" value="图片添加" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/mm/TestSpring.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/filter/SystemContextFilter.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/item/add.jsp</url>
+          <line>15</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/LoginController.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/car/car.jsp</url>
+          <line>32</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/base/BaseServiceImpl.java</url>
+          <line>153</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/base/BaseServiceImpl.java</url>
+          <line>156</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/base/BaseServiceImpl.java</url>
+          <line>158</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/base/BaseServiceImpl.java</url>
+          <line>159</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/base/BaseServiceImpl.java</url>
+          <line>157</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>153</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>152</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>167</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/UserController.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/UserController.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/UserController.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/UserController.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/UserController.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/UserController.java</url>
+          <line>99</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mm/controller/ItemController.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/mm/TestSpring.java</url>
+          <line>82</line>
+          <properties class="com.mm.TestSpring" method="testSpring5">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/mm/TestSpring.java</url>
+          <line>121</line>
+          <properties class="com.mm.TestSpring" method="testSpring9">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
